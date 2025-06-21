@@ -8,32 +8,46 @@
       font-family: Arial, sans-serif;
       text-align: center;
       padding-top: 100px;
-      background-color: #f0f0f0;
-    }
-    h1 {
+      background-color: #f0f8ff;
       color: #333;
     }
+
+    h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
     p {
-      font-size: 20px;
-      color: #555;
+      font-size: 22px;
+      color: #444;
+    }
+
+    .icons {
+      font-size: 40px;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
-  <h1>My AI Journey Begins!</h1>
-  <p id="greeting"></p>
+  <h1>My AI Journey Begins! 🤖</h1>
+
+  <p id="welcomeMessage">Welcome visitor!</p>
+
+  <div class="icons">
+    💻 🧠 🛰️
+  </div>
 
   <script>
-    const name = "Pedro";  // You can change this to test different names
+    const name = prompt("What's your name?");
     let message;
-    
+
     if (name === "Pedro") {
       message = "Hello, Is this the awesome AI director Pedro? I am new to AI, I am here to learn and build with you in my new Repo.";
     } else {
       message = "Hello, I am " + name + ". I am new to AI, I am here to learn and build with you in my new Repo.";
     }
-    
-    document.getElementById("greeting").textContent = message;
+
+    document.getElementById("welcomeMessage").innerText = message;
   </script>
 </body>
 </html>
