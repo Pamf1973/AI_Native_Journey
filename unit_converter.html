@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🌍 Unit Converter</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #fffde7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      color: #2e7d32;
+      margin-bottom: 20px;
+    }
+    .converter {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 90%;
+      max-width: 500px;
+    }
+    select, input, button {
+      width: 90%;
+      margin: 10px 0;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #388e3c;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔄 My AI Unit Converter</h1>
+  <div class="converter">
+    <select id="category">
+      <option value="length">📏 Length</option>
+      <option value="weight">⚖️ Weight</option>
+      <option value="temperature">🌡️ Temperature</option>
+      <option value="volume">🧪 Volume</option>
+    </select>
+    
+    <select id="conversion"></select>
+    
+    <input type="number" id="value" placeholder="Enter value" />
+    <button onclick="convert()">Convert 🔁</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const conversions = {
+      length: {
+        "Meters to Feet": val => val * 3.28084,
+        "Kilometers to Miles": val => val * 0.621371,
+        "Inches to Centimeters": val => val * 2.54
+      },
+      weight: {
+        "Pounds to Kilograms": val => val / 2.20462,
+        "Ounces to Grams": val => val * 28.3495,
+        "Grams to Ounces": val => val / 28.3495
+      },
+      temperature: {
+        "Celsius to Fahrenheit": val => (val * 9/5) + 32,
+        "Fahrenheit to Celsius": val => (val - 32) * 5/9
+      },
+      volume: {
+        "Liters to Gallons": val => val * 0.264172,
+        "Milliliters to Fluid Ounces": val => val / 29.5735,
+        "Cups to Milliliters": val => val * 236.588
+      }
+    };
+
+    const categorySelect = document.getElementById('category');
+    const conversionSelect = document.getElementById('conversion');
+
+    function updateConversionOptions() {
+      const selectedCategory = categorySelect.value;
+      conversionSelect.innerHTML = "";
+      for (let key in conversions[selectedCategory]) {
+        const option = document.createElement('option');
+        option.value = key;
+        option.textContent = key;
+        conversionSelect.appendChild(option);
+      }
+    }
+
+    categorySelect.addEventListener('change', updateConversionOptions);
+    window.addEventListener("DOMContentLoaded", updateConversionOptions); // ✅ FIXED
+
+    function convert() {
+      const category = categorySelect.value;
+      const conversion = conversionSelect.value;
+      const inputValue = parseFloat(document.getElementById('value').value);
+
+      if (isNaN(inputValue)) {
+        document.getElementById('result').textContent = "⚠️ Please enter a valid number.";
+        return;
+      }
+
+      const result = conversions[category][conversion](inputValue);
+      document.getElementById('result').textContent = `✅ Result: ${result.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>
