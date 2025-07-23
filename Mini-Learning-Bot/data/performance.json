@@ -1,0 +1,18 @@
+{
+  "Photosynthesis": {
+    "asked": 6,
+    "correct": 1
+  },
+  "Osmosis": {
+    "asked": 8,
+    "correct": 1
+  },
+  "Car": {
+    "asked": 8,
+    "correct": 0
+  },
+  "pool": {
+    "asked": 7,
+    "correct": 0
+  }
+}
